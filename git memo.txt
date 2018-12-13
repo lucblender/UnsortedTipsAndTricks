@@ -1,0 +1,3 @@
+git status
+git commit -am "Modify the path of class in jar file for it's JNI reference"
+git push https://lucgotthard@bitbucket.org/isivs/cii.git master

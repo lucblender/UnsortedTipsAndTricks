@@ -1,0 +1,9 @@
+#info about file system to locate correct disk
+df -h
+
+#save image
+sudo dd if=/dev/sdc of=fingerVeinLite.img status=progress
+sudo sync
+
+#load image
+sudo dd bs=4M if=fingerVeinLite.img of=/dev/sdc status=progress

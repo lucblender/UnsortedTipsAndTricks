@@ -1,0 +1,6 @@
+sudo svn mkdir https://repos.hevs.ch/svn/fusible/dlms_gui
+sudo svn co https://repos.hevs.ch/svn/fusible/dlms_gui dlmsGUI
+cd dlmsGUI/
+sudo svn st
+sudo svn add *
+sudo svn ci

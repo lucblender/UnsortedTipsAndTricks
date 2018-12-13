@@ -1,0 +1,57 @@
+WHITE='\033[0;37m'  
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+printf "${WHITE}Changing Hostname${NC}\n"
+
+SD_CARD_LOCATION=/media/lucas/2f840c69-cecb-4b10-87e4-01b9d28c231c1
+BOOT_LOCATION=/media/lucas/boot
+
+if [ -d "$SD_CARD_LOCATION" ] && [ -d "$BOOT_LOCATION" ]
+	then 
+		echo SDCard mounted correctly
+	else 
+		echo SDCard not mounted correctly
+		exit 1 
+fi
+
+OLD_HOSTNAME=$(cat $SD_CARD_LOCATION/etc/hostname)
+
+echo Current hostname is: $OLD_HOSTNAME
+
+echo -n Enter new hostname:\ ; read NEW_HOSTNAME
+
+echo Changing hostname and hosts from $SD_CARD_LOCATION
+sudo sed -i 's/'$OLD_HOSTNAME'/'$NEW_HOSTNAME'/g' $SD_CARD_LOCATION/etc/hosts
+sudo sed -i 's/'$OLD_HOSTNAME'/'$NEW_HOSTNAME'/g' $SD_CARD_LOCATION/etc/hostname
+
+
+printf "${WHITE}Changing HTML Page password${NC}\n"
+
+
+HOSTNAME=$(cat $SD_CARD_LOCATION/etc/hostname)
+
+printf "Hostname is: ${RED}$HOSTNAME${NC}\n"
+
+printf "${WHITE}Copy shadow and .vnc/passwd Files${NC}\n"
+sudo cp shadow $SD_CARD_LOCATION/etc
+sudo cp passwd $SD_CARD_LOCATION/home/pi/.vnc
+
+printf "${WHITE}Changing Password on html page${NC}\n"
+cat $SD_CARD_LOCATION/var/www/html/index.php | grep --color robots1234 
+sudo sed -i 's/'robots1234'/'psswdFET1234'/g' $SD_CARD_LOCATION/var/www/html/index.php 
+cat $SD_CARD_LOCATION/var/www/html/index.php | grep --color psswdFET1234
+
+printf "${WHITE}Changing VNC Resolution${NC}\n"
+echo Changing VNC Resolutionfrom $SD_CARD_LOCATION
+cat $SD_CARD_LOCATION/etc/systemd/system/vncserver@.service | grep --color 1280x768 
+sudo sed -i 's/'1280x768'/'1920x1080'/g' $SD_CARD_LOCATION/etc/systemd/system/vncserver@.service
+cat $SD_CARD_LOCATION/etc/systemd/system/vncserver@.service | grep --color 1920x1080
+
+echo unmounting $BOOT_LOCATION and $SD_CARD_LOCATION
+
+sudo umount $BOOT_LOCATION
+sudo umount $SD_CARD_LOCATION
+
+
+

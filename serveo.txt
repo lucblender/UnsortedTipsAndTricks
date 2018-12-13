@@ -1,0 +1,8 @@
+#link localhost:5002 to connectfour.serveo.net with auto-re-connection
+autossh -M 0 -R connectfour.serveo.net:80:localhost:5002 serveo.net
+
+#link ssh on port 22 to connectfourssh
+autossh -M 0 -R connectfourSSH:22:localhost:22 serveo.net with auto-re-connection
+
+#connect ssh to connectfourssh
+ssh -J serveo.net pi@connectfourssh
