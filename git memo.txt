@@ -1,3 +1,11 @@
+#creation
+git init
+git add *
+git commit -m "first commit"
+git remote add origin sshURL
+git push -u origin master
+
+#push
 git status
-git commit -am "Modify the path of class in jar file for it's JNI reference"
-git push https://lucgotthard@bitbucket.org/isivs/cii.git master
+git commit -am "Descritpion"
+git push httpsURL master

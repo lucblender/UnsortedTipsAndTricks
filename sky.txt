@@ -1,0 +1,5 @@
+if [ "$(id -u)" != "0" ]; then
+echo sky: need root access to change sky
+exit 1
+fi
+echo sky: changed to beautiful sky
