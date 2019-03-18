@@ -21,3 +21,18 @@ sudo docker login vlegridlabep.hevs.ch
 
 # Push the image to the registry.
 sudo docker push vlegridlabep.hevs.ch/dlmsmain:1.2
+
+#create a volume
+sudo docker volume create certificates
+
+#list all volume
+sudo docker volume ls
+
+#inspect a volume
+sudo docker volume inspect certificates
+
+#remove unused volume
+sudo docker volume prune
+
+#launch with volume
+sudo docker run -v certificates:/certificates/ -it image:version
