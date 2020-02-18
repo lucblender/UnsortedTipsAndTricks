@@ -36,3 +36,9 @@ sudo docker volume prune
 
 #launch with volume
 sudo docker run -v certificates:/certificates/ -it image:version
+
+#get list of exited docker 
+docker ps --filter "status=exited"
+
+#remove all exited docker
+sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm
