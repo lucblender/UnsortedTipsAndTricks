@@ -37,6 +37,9 @@ sudo docker volume prune
 #launch with volume
 sudo docker run -v certificates:/certificates/ -it image:version
 
+#get volume used by a container
+docker inspect --format="{{.Mounts}}" $containerID
+
 #get list of exited docker 
 docker ps --filter "status=exited"
 
